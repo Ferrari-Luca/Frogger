@@ -5,7 +5,7 @@ using namespace std;
 
 
 struct LaneInfo{
-    string lanetype;
+    char lanetype;
     double speed;
     string gameobject;
 };
@@ -20,7 +20,7 @@ class GameData{
         LaneInfo{"R", 1, "_______LL___LL______LL__"},
         LaneInfo{"R", 3, "__LLLL__________LLLL____"},
         LaneInfo{"S", 0, "________________________"},
-        LaneInfo{"S", 1, "C__C__C__C__C__C__C__C__"},
+        LaneInfo{"S", 1, "C__L__C__C__C__C__C__C__"},
         LaneInfo{"S", 1.5, "_________________CCCCC__"},
         LaneInfo{"S", 3, "_________CC_____________"},
         LaneInfo{"S", 2, "________________________"},
