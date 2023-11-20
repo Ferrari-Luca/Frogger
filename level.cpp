@@ -1,15 +1,18 @@
 #include <iostream>
 #include <vector>
 #include <string>
+using namespace std;
+
 
 struct LaneInfo{
-    string gameobject;
+    string lanetype;
     double speed;
-    char lanetype;
-}
-class GameData() {
+    string gameobject;
+};
+
+class GameData{
     // Vecteur de paires (string, float) représentant le niveau de Frogger avec des points
-    std::vector<LaneInfo> froggerLevel1 = {
+    vector<LaneInfo> froggerLevel1 = {
         LaneInfo{"R", 1, "________________________"},
         LaneInfo{"R", 1.5, "_LLL_LLL___LLL____LLL___"},
         LaneInfo{"R", 2, "____LLLLLLLLLLLLL_______"},
@@ -26,7 +29,7 @@ class GameData() {
 
     };
     public:
-        std::vector<LaneInfo> getLevel(){
+        vector<LaneInfo> getLevel(){
             return froggerLevel1;
         }
-}
+};
