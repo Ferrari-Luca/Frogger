@@ -116,7 +116,21 @@ void Frog::move(double speed){
   r.setCenter(currentCenter);
 }
 
-class Lane{};
+class Lane{
+  vector<SlidingObject> laneobjects;
+  bool isDeadly;
+  public:
+      Lane(LaneInfo info){
+        if (info.lanetype == "R"){isDeadly=true;}
+        else{isDeadly=false;}
+        for (int i=0;i++;i<size(info.gameobject){
+          if info.gameobject[i]==C{}
+          laneobjects.push_back(Car(speed,posenfonctiondei))
+          else
+
+        })
+      }
+};
 
 class Canvas {
   Frog player;
