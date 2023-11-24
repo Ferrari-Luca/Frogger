@@ -6,7 +6,7 @@
 #include <FL/fl_draw.H>
 #include <vector>
 #include <string>
-
+#include <memory>
 using namespace std;
 
 const double refreshPerSecond = 60;

@@ -22,9 +22,9 @@ public:
 
     void treatCollision(SlidingObject *object);
 
-    Lane *getLane() const;
+    // Lane *getLane() const;
 
-    void setLane(vector<Lane> &lanes);
+    // void setLane(vector<Lane> &lanes);
 };
 
 #endif //FROGGER_FROG_H

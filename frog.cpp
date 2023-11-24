@@ -33,9 +33,9 @@ void Frog::move() {
 void Frog::checkCollision() {
     bool noCollisionDetected = true;
     for (const auto &object: lanes[currentLaneIndex].getLaneObjects()) {
-        if (r.checkCollision(object.getPhysical())) {
+        if (r.checkCollision(object->getPhysical())) {
             noCollisionDetected = false;
-            if (not object.getIsDeadly()) { speed = object.getSpeed(); }
+            if (not object->getIsDeadly()) { speed = object->getSpeed(); }
             else {
                 r.setCenter({windowWidth / 2, 25 * windowHeight / 26});
                 currentLaneIndex = 12;
@@ -54,7 +54,7 @@ void Frog::checkCollision() {
 }
 
 
-void Frog::setLane(vector<Lane> &laness) {
-    lanes = laness;
-}
+// void Frog::setLane(vector<Lane> &laness) {
+//     lanes = laness;
+// }
 

@@ -5,7 +5,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
     GameData gamedata;
-    MainWindow window(gamedata.getLevel());
+    MainWindow window(gamedata.getLevel(0));
     window.show(argc, argv);
     return Fl::run();
 }

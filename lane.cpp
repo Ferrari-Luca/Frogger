@@ -1,4 +1,6 @@
+
 #include "lane.hpp"
+
 
 Lane::Lane(const LaneInfo &info, Point center) : rect(center, windowWidth, casesize) {
     isDeadly = (info.lanetype == 'R') ? true : false;
@@ -12,25 +14,28 @@ Lane::Lane(const LaneInfo &info, Point center) : rect(center, windowWidth, cases
     for (int i = 0; i < info.gameobject.size(); i++) {
         Point object_center{static_cast<double>((i - 5) * casesize + windowWidth / 26), rect.getCenter().y};
         if (info.gameobject[i] == 'C') {
-            laneObjects.push_back(Car(info.speed, object_center));
-        }
-        if (info.gameobject[i] == 'L') {
-            laneObjects.push_back(Log(info.speed, object_center));
+            laneObjects.push_back(make_unique<Car>(info.speed, object_center));
+        } else if (info.gameobject[i] == 'L') {
+            laneObjects.push_back(make_unique<Log>(info.speed, object_center));
+        } else if (info.gameobject[i] == 'T') {
+            laneObjects.push_back(make_unique<Turtle>(info.speed, object_center, 0));
+        } else if (info.gameobject[i] == 't') {
+            laneObjects.push_back(make_unique<Turtle>(info.speed, object_center, 1.0));
         }
     }
 }
 
 void Lane::update() {
-    for (auto &object: laneObjects) {
-        object.slide();
+    for (auto &object : laneObjects) {
+        object->slide();
     }
 }
 
 void Lane::draw() {
     fl_draw_box(FL_FLAT_BOX, rect.getCenter().x - windowWidth / 2, rect.getCenter().y - casesize / 2, windowWidth,
                 casesize, rect.getColor());
-    for (auto &object: laneObjects) {
-        object.draw();
+    for (auto &object : laneObjects) {
+        object->draw();
     }
 }
 
@@ -38,6 +43,6 @@ bool Lane::getIsDeadly() const {
     return isDeadly;
 }
 
-const std::vector<SlidingObject> &Lane::getLaneObjects() const {
+const vector<unique_ptr<SlidingObject>> &Lane::getLaneObjects() const {
     return laneObjects;
 }

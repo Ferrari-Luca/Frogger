@@ -5,7 +5,7 @@
 #include "gamedata.hpp"
 
 class Lane {
-    vector<SlidingObject> laneObjects;
+    vector<unique_ptr<SlidingObject>> laneObjects;
     bool isDeadly;
     Rectangle rect;
 
@@ -13,12 +13,9 @@ public:
     Lane(const LaneInfo &info, Point center);
 
     void update();
-
     void draw();
-
     bool getIsDeadly() const;
-
-    const vector<SlidingObject> &getLaneObjects() const;
+    const vector<unique_ptr<SlidingObject>> &getLaneObjects() const;
 };
 
 #endif // LANE_HPP

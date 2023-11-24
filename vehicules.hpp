@@ -4,6 +4,7 @@
 #include "point-rectangle.hpp"
 
 class SlidingObject {
+protected:
     bool isDeadly;
     double speed;
     Rectangle physicalBorder;
@@ -16,7 +17,7 @@ public:
 
     Point getPosition();
 
-    void draw();
+    virtual void draw();
 
     void slide();
 
@@ -36,10 +37,22 @@ public:
 
 class Log : public SlidingObject {
 public:
-    Log(double carSpeed, const Point &carPosition)
-            : SlidingObject(false, carSpeed,
-                            {carPosition, casesize, casesize, fl_rgb_color(165, 42, 42), fl_rgb_color(165, 42, 42)}) {
+    Log(double logSpeed, const Point &logPosition)
+            : SlidingObject(false, logSpeed,
+                            {logPosition, casesize, casesize, fl_rgb_color(165, 42, 42), fl_rgb_color(165, 42, 42)}) {
     }
 };
 
+class Turtle : public SlidingObject {
+    double delay;
+    bool diving;
+    public:
+        Turtle(double turtleSpeed, const Point &turtlePosition, double delay);              
+    
+        void draw() override;
+        static void updateStateCallback(void *userdata);
+        void updateState();
+
+    // Fonction pour démarrer la minuterie
+};
 #endif //FROGGER_VEHICULES_HPP
