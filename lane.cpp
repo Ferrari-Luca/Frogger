@@ -1,4 +1,4 @@
-#include "Lane.hpp"
+#include "lane.hpp"
 
 Lane::Lane(const LaneInfo& info, Point center) : rect(center, windowWidth, casesize) {
     isDeadly = (info.lanetype == 'R') ? true : false;

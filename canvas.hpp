@@ -1,8 +1,8 @@
 #ifndef CANVAS_HPP
 #define CANVAS_HPP
 
-#include "Frog.hpp"
-#include "Lane.hpp"
+#include "frog.hpp"
+#include "lane.hpp"
 
 class Canvas {
     Frog player;

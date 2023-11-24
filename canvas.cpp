@@ -1,4 +1,4 @@
-#include "Canvas.hpp"
+#include "canvas.hpp"
 
 Canvas::Canvas(const std::vector<LaneInfo>& level, Point frogCenter, int frogWidth, int frogHeight)
     : player(frogCenter, frogWidth, frogHeight, lanes) {

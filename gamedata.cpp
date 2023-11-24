@@ -1,4 +1,4 @@
-#include "GameData.hpp"
+#include "gamedata.hpp"
 
 GameData::GameData() {
     froggerLevel1 = {

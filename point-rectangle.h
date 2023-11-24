@@ -1,18 +1,8 @@
-#include <FL/Fl.H>
-#include <FL/fl_draw.H>
-#include <FL/Fl_Double_Window.H>
-#include <FL/Fl_Box.H>
-#include <string>
-#include <math.h>
-#include <time.h>
-#include <chrono>
-#include <iostream>
-#include <random>
-#include <vector>
-#include <memory>
-
 #ifndef FROGGER_POINT_RECTANGLE_H
 #define FROGGER_POINT_RECTANGLE_H
+
+#include <FL/Fl.H>
+#include <FL/fl_draw.H>
 
 struct Point {
     double x, y;
@@ -48,6 +38,5 @@ public:
 
     int getHeight() { return h; }
 };
-
 
 #endif //FROGGER_POINT_RECTANGLE_H

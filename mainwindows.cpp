@@ -1,4 +1,4 @@
-#include "MainWindow.hpp"
+#include "mainwindows.hpp"
 
 MainWindow::MainWindow(const std::vector<LaneInfo>& level)
     : Fl_Window(900, 900, windowWidth, windowHeight, "Lab 2"), canvas(level) {

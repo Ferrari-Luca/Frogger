@@ -2,13 +2,7 @@
 #define LANE_HPP
 
 #include <vector>
-#include "SlidingObject.hpp"
-
-struct LaneInfo{
-    char lanetype;
-    double speed;
-    string gameobject;
-};
+#include "vehicules.hpp"
 
 class Lane {
     std::vector<SlidingObject> laneObjects;
