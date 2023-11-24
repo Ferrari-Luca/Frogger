@@ -10,9 +10,13 @@ void SlidingObject::draw() {
 
 void SlidingObject::slide() {
     Point currentCenter = physicalBorder.getCenter();
-    if (currentCenter.x >= windowWidth + casesize * 6 + windowWidth / 26) {
+    if (currentCenter.x >= windowWidth + casesize * 6 + windowWidth / 26 && speed>0) {
         currentCenter.x = -5 * casesize + windowWidth / 26;
     }
+    else if (currentCenter.x <= -(casesize * 6 + windowWidth / 26) && speed < 0) {
+    currentCenter.x = windowWidth + 5 * casesize - windowWidth / 26;
+}
+
     currentCenter.x += speed;
     physicalBorder.setCenter(currentCenter);
 }
