@@ -269,6 +269,7 @@ void Frog::move() {
 
 void Frog::checkCollision() {
     bool noCollisionDetected = true;
+    cout <<currentLaneIndex<<endl;
     for (const auto& object : lanes[currentLaneIndex].getLaneObjects()){
     if (r.checkCollision(object.getPhysical())){
         noCollisionDetected = false;

@@ -95,3 +95,45 @@ int main() {
     window.show();
     return Fl::run();
 }
+
+
+#include <iostream>
+#include <vector>
+#include <memory>
+
+struct Lane {
+    // Définir la structure de votre Lane ici
+};
+
+int main() {
+    // Supposez que vous avez déjà un vecteur de lanes
+    std::vector<Lane> lanes = /* ... */;
+
+    // Supposez que vous avez un pointeur intelligent unique qui pointe vers un élément de lanes
+    std::unique_ptr<Lane> ptrToLane = /* ... */;
+
+    // Trouver l'itérateur correspondant à l'élément pointé par le pointeur
+    auto it = std::find(lanes.begin(), lanes.end(), *ptrToLane);
+
+    // Vérifier si l'élément pointé est dans le vecteur lanes
+    if (it != lanes.end()) {
+        // Avancer l'itérateur vers l'élément suivant
+        ++it;
+
+        // Vérifier si nous avons atteint la fin du vecteur
+        if (it != lanes.end()) {
+            // Mettez à jour le pointeur pour pointer vers l'élément suivant
+            ptrToLane.reset(new Lane(*it));
+        } else {
+            // Vous êtes déjà à la fin du vecteur, faites quelque chose en conséquence
+            std::cout << "Le pointeur est déjà à la fin du vecteur." << std::endl;
+        }
+    } else {
+        // Le pointeur ne pointe pas vers un élément valide dans le vecteur lanes
+        std::cout << "Le pointeur ne pointe pas vers un élément valide dans le vecteur lanes." << std::endl;
+    }
+
+    // À ce stade, ptrToLane pointe vers l'élément suivant (s'il existe) dans le vecteur lanes
+
+    return 0;
+}
