@@ -1,8 +1,8 @@
 #ifndef LANE_HPP
 #define LANE_HPP
 
-#include <vehicules.hpp>
-#include <gamedata.hpp>
+#include "vehicules.hpp"
+#include "gamedata.hpp"
 
 class Lane {
     vector<SlidingObject> laneObjects;

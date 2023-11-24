@@ -1,7 +1,7 @@
 #ifndef FROGGER_FROG_H
 #define FROGGER_FROG_H
 
-#include <lane.hpp>
+#include "lane.hpp"
 
 class Frog {
     Rectangle r;

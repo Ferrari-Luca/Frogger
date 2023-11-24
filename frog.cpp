@@ -1,4 +1,4 @@
-#include <frog.hpp>
+#include "frog.hpp"
 
 Frog::Frog(Point center, int w, int h, vector<Lane> &lanes) :
         r(center, w, h, FL_BLACK, FL_GREEN), lanes(lanes) {}

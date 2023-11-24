@@ -1,7 +1,7 @@
 #ifndef FROGGER_POINT_RECTANGLE_H
 #define FROGGER_POINT_RECTANGLE_H
 
-#include <utils.hpp>
+#include "utils.hpp"
 
 struct Point {
     double x, y;

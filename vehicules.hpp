@@ -1,7 +1,7 @@
 #ifndef FROGGER_VEHICULES_HPP
 #define FROGGER_VEHICULES_HPP
 
-#include <point-rectangle.hpp>
+#include "point-rectangle.hpp"
 
 class SlidingObject {
     bool isDeadly;
