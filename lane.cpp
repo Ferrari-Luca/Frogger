@@ -1,6 +1,6 @@
 #include "lane.hpp"
 
-Lane::Lane(const LaneInfo& info, Point center) : rect(center, windowWidth, casesize) {
+Lane::Lane(const LaneInfo &info, Point center) : rect(center, windowWidth, casesize) {
     isDeadly = (info.lanetype == 'R') ? true : false;
     Fl_Color color = (info.lanetype == 'R') ? FL_BLUE : FL_DARK3;
     if (info.lanetype == 'N') {
@@ -21,14 +21,15 @@ Lane::Lane(const LaneInfo& info, Point center) : rect(center, windowWidth, cases
 }
 
 void Lane::update() {
-    for (auto& object : laneObjects) {
+    for (auto &object: laneObjects) {
         object.slide();
     }
 }
 
 void Lane::draw() {
-    fl_draw_box(FL_FLAT_BOX, rect.getCenter().x - windowWidth / 2, rect.getCenter().y - casesize / 2, windowWidth, casesize, rect.getColor());
-    for (auto& object : laneObjects) {
+    fl_draw_box(FL_FLAT_BOX, rect.getCenter().x - windowWidth / 2, rect.getCenter().y - casesize / 2, windowWidth,
+                casesize, rect.getColor());
+    for (auto &object: laneObjects) {
         object.draw();
     }
 }
@@ -37,6 +38,6 @@ bool Lane::getIsDeadly() const {
     return isDeadly;
 }
 
-const std::vector<SlidingObject>& Lane::getLaneObjects() const {
+const std::vector<SlidingObject> &Lane::getLaneObjects() const {
     return laneObjects;
 }

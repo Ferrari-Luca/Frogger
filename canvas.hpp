@@ -2,11 +2,10 @@
 #define CANVAS_HPP
 
 #include "frog.hpp"
-#include "lane.hpp"
 
 class Canvas {
     Frog player;
-    std::vector<Lane> lanes;
+    vector<Lane> lanes;
 
 public:
     Canvas(const std::vector<LaneInfo>& level,

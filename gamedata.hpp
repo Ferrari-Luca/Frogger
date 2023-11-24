@@ -1,22 +1,21 @@
 #ifndef GAMEDATA_HPP
 #define GAMEDATA_HPP
 
-#include <vector>
-#include <string>
+#include <utils.hpp>
 
 struct LaneInfo {
     char lanetype;
     double speed;
-    std::string gameobject;
+    string gameobject;
 };
 
 class GameData {
-    std::vector<LaneInfo> froggerLevel1;
+    vector<LaneInfo> froggerLevel1;
 
 public:
     GameData();
 
-    std::vector<LaneInfo> getLevel();
+    vector<LaneInfo> getLevel();
 };
 
 #endif // GAMEDATA_HPP

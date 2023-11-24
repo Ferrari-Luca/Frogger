@@ -1,16 +1,7 @@
+#ifndef FROGGER_VEHICULES_HPP
+#define FROGGER_VEHICULES_HPP
 
-#ifndef FROGGER_VEHICULES_H
-#define FROGGER_VEHICULES_H
-
-#include <point-rectangle.h>
-
-using namespace std;
-
-const double refreshPerSecond = 60;
-const int windowWidth = 780;
-const int windowHeight = 780;
-const int casesize = windowWidth / 13;
-
+#include <point-rectangle.hpp>
 
 class SlidingObject {
     bool isDeadly;
@@ -51,4 +42,4 @@ public:
     }
 };
 
-#endif //FROGGER_VEHICULES_H
+#endif //FROGGER_VEHICULES_HPP

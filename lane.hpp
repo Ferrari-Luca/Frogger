@@ -1,21 +1,24 @@
 #ifndef LANE_HPP
 #define LANE_HPP
 
-#include <vector>
-#include "vehicules.hpp"
+#include <vehicules.hpp>
+#include <gamedata.hpp>
 
 class Lane {
-    std::vector<SlidingObject> laneObjects;
+    vector<SlidingObject> laneObjects;
     bool isDeadly;
     Rectangle rect;
 
 public:
-    Lane(const LaneInfo& info, Point center);
+    Lane(const LaneInfo &info, Point center);
 
     void update();
+
     void draw();
+
     bool getIsDeadly() const;
-    const std::vector<SlidingObject>& getLaneObjects() const;
+
+    const vector<SlidingObject> &getLaneObjects() const;
 };
 
 #endif // LANE_HPP

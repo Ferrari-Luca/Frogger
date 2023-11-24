@@ -1,4 +1,4 @@
-#include <point-rectangle.h>
+#include <point-rectangle.hpp>
 
 // Implémentation du constructeur
 Rectangle::Rectangle(Point center, int w, int h,
