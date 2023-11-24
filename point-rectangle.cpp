@@ -1,47 +1,4 @@
-#include <FL/Fl.H>
-#include <FL/fl_draw.H>
-#include <FL/Fl_Double_Window.H>
-#include <FL/Fl_Box.H>
-#include <string>
-#include <math.h>
-#include <time.h>
-#include <chrono>
-#include <iostream>
-#include <random>
-#include <vector>
-
-using namespace std;
-const int windowWidth = 780;
-const int windowHeight = 780;
-
-struct Point {
-    double x, y;
-};
-
-class Rectangle {
-private:
-    Point center;
-    int w, h;
-    Fl_Color frameColor;
-    Fl_Color fillColor;
-
-public:
-    Rectangle(Point center, int w, int h,
-              Fl_Color frameColor = FL_BLACK,
-              Fl_Color fillColor = FL_WHITE);
-
-    void draw();
-
-    void setFillColor(Fl_Color newFillColor);
-
-    void setFrameColor(Fl_Color newFrameColor);
-
-    bool contains(Point p);
-
-    void setCenter(Point newCenter);
-
-    Point getCenter() const;
-};
+#include <point-rectangle.h>
 
 // Implémentation du constructeur
 Rectangle::Rectangle(Point center, int w, int h,
@@ -50,6 +7,26 @@ Rectangle::Rectangle(Point center, int w, int h,
         : center(center), w(w), h(h), frameColor(frameColor), fillColor(fillColor) {
     // Vous pouvez ajouter d'autres opérations d'initialisation ici si nécessaire
 }
+
+bool Rectangle::checkCollision(Rectangle other) {
+    double thisLeft = center.x - w / 2;
+    double thisRight = center.x + w / 2;
+    double thisTop = center.y - h / 2;
+    double thisBottom = center.y + h / 2;
+
+    double otherLeft = other.getCenter().x - other.getWidth() / 2;
+    double otherRight = other.getCenter().x + other.getWidth() / 2;
+    double otherTop = other.getCenter().y - other.getHeight() / 2;
+    double otherBottom = other.getCenter().y + other.getHeight() / 2;
+
+    return (
+            thisLeft < otherRight &&
+            thisRight > otherLeft &&
+            thisTop < otherBottom &&
+            thisBottom > otherTop
+    );
+}
+
 
 void Rectangle::draw() {
     // Ajout de dessins
@@ -63,10 +40,6 @@ void Rectangle::setFillColor(Fl_Color color) {
 
 void Rectangle::setFrameColor(Fl_Color color) {
     frameColor = color;
-}
-
-bool Rectangle::contains(Point p) {
-    return ((center.x - w / 2 < p.x && p.x < center.x + w / 2) && (center.y - h / 2 < p.y && p.y < center.y + h / 2));
 }
 
 Point Rectangle::getCenter() const {
