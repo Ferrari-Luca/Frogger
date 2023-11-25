@@ -11,7 +11,7 @@ Lane::Lane(const LaneInfo &info, Point center) : rect(center, windowWidth, cases
     rect.setFillColor(color);
     rect.setFrameColor(color);
 
-    for (int i = 0; i < info.gameobject.size(); i++) {
+    for (int i = 0; i < (int) info.gameobject.size(); i++) {
         Point object_center{static_cast<double>((i - 5) * casesize + windowWidth / 26.0), rect.getCenter().y};
         if (info.gameobject[i] == 'C') {
             laneObjects.push_back(make_unique<Car>(info.speed, object_center));
@@ -21,6 +21,8 @@ Lane::Lane(const LaneInfo &info, Point center) : rect(center, windowWidth, cases
             laneObjects.push_back(make_unique<Turtle>(info.speed, object_center, 0));
         } else if (info.gameobject[i] == 't') {
             laneObjects.push_back(make_unique<Turtle>(info.speed, object_center, 1.0));
+        } else if (info.gameobject[i] == 'N') {
+            laneObjects.push_back(make_unique<Nenuphar>(object_center));
         }
     }
 }

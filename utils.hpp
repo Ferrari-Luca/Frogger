@@ -16,6 +16,7 @@ const double refreshPerSecond = 60;
 const int windowWidth = 780;
 const int windowHeight = 780;
 const int casesize = windowWidth / 13;
-
+const int frogWidth = casesize - 20;
+const int frogHeight = casesize - 20;
 
 #endif //FROGGER_UTILS_HPP

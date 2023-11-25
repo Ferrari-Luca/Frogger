@@ -24,6 +24,8 @@ public:
     void checkInBounds();
 
     void dead();
+
+    void win();
 };
 
 #endif //FROGGER_FROG_H

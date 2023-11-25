@@ -22,6 +22,8 @@ public:
     double getSpeed() const { return speed; }
 
     Rectangle const getPhysical() const { return physicalBorder; }
+
+    void changeIsDeadly();
 };
 
 class Car : public SlidingObject {
@@ -42,13 +44,25 @@ public:
 class Turtle : public SlidingObject {
     double delay;
     bool diving;
-    public:
-        Turtle(double turtleSpeed, const Point &turtlePosition, double delay);
+public:
+    Turtle(double turtleSpeed, const Point &turtlePosition, double delay);
 
-        void draw() override;
-        static void updateStateCallback(void *userdata);
-        void updateState();
+    void draw() override;
+
+    static void updateStateCallback(void *userdata);
+
+    void updateState();
 
     // Fonction pour démarrer la minuterie
 };
+
+class Nenuphar : public SlidingObject {
+public :
+    Nenuphar(const Point &nenupharPosition)
+            : SlidingObject(false, 0, {nenupharPosition, casesize, casesize, fl_rgb_color(8, 71, 23),
+                                       fl_rgb_color(8, 71, 23)}) {}
+
+    void draw() override;
+};
+
 #endif //FROGGER_VEHICULES_HPP

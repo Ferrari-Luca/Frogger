@@ -35,7 +35,12 @@ void Frog::checkCollision() {
     for (const auto &object: lanes[currentLaneIndex].getLaneObjects()) {
         if (r.checkCollision(object->getPhysical())) {
             noCollisionDetected = false;
-            if (not object->getIsDeadly()) { speed = object->getSpeed(); }
+            if (not object->getIsDeadly()) {
+                if (not object->getSpeed()){ // on est sur un nénuphar
+                    object->changeIsDeadly();
+                    win();
+                }
+                speed = object->getSpeed(); }
             else {
                 dead();
             }
@@ -59,5 +64,12 @@ void Frog::checkInBounds() {
 void Frog::dead() {
     r.setCenter({windowWidth / 2.0, 25.0 * windowHeight / 26});
     currentLaneIndex = 12;
+    cout <<"dead"<<endl;
 
+}
+
+void Frog::win() {
+    r.setCenter({windowWidth / 2.0, 25.0 * windowHeight / 26});
+    currentLaneIndex = 12;
+    cout <<"won"<<endl;
 }
