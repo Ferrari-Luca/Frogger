@@ -1,14 +1,14 @@
 #include "point-rectangle.hpp"
 
 // Implémentation du constructeur
-Rectangle::Rectangle(Point center, int w, int h,
+Rectangle::Rectangle(Point center, double w, double h,
                      Fl_Color frameColor,
                      Fl_Color fillColor)
         : center(center), w(w), h(h), frameColor(frameColor), fillColor(fillColor) {
     // Vous pouvez ajouter d'autres opérations d'initialisation ici si nécessaire
 }
 
-bool Rectangle::checkCollision(Rectangle other) {
+bool Rectangle::checkCollision(Rectangle other) const{
     double thisLeft = center.x - w / 2;
     double thisRight = center.x + w / 2;
     double thisTop = center.y - h / 2;
@@ -28,10 +28,10 @@ bool Rectangle::checkCollision(Rectangle other) {
 }
 
 
-void Rectangle::draw() {
+void Rectangle::draw() const{
     // Ajout de dessins
-    fl_draw_box(FL_FLAT_BOX, center.x - w / 2, center.y - w / 2, w, h, fillColor);
-    fl_draw_box(FL_BORDER_FRAME, center.x - w / 2, center.y - w / 2, w, h, frameColor);
+    fl_draw_box(FL_FLAT_BOX, center.x - w / 2, center.y - w / 2, (int) w, (int) h, fillColor);
+    fl_draw_box(FL_BORDER_FRAME, center.x - w / 2, center.y - w / 2, (int) w, (int) h, frameColor);
 }
 
 void Rectangle::setFillColor(Fl_Color color) {

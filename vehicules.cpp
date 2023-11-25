@@ -1,5 +1,5 @@
 #include "vehicules.hpp"
-#include <iostream>
+
 const long double pi = 3.141592653589793238462643383279502884L;
 bool SlidingObject::getIsDeadly() const {
     return isDeadly;
@@ -11,11 +11,11 @@ void SlidingObject::draw() {
 
 void SlidingObject::slide() {
     Point currentCenter = physicalBorder.getCenter();
-    if (currentCenter.x >= windowWidth + casesize * 6 + windowWidth / 26 && speed>0) {
-        currentCenter.x = -5 * casesize + windowWidth / 26;
+    if (currentCenter.x >= windowWidth + casesize * 6 + windowWidth / 26.0 && speed>0) {
+        currentCenter.x = -5 * casesize + windowWidth / 26.0;
     }
-    else if (currentCenter.x <= -(casesize * 6 + windowWidth / 26) && speed < 0) {
-    currentCenter.x = windowWidth + 5 * casesize - windowWidth / 26;
+    else if (currentCenter.x <= -(casesize * 6 + windowWidth / 26.0) && speed < 0) {
+    currentCenter.x = windowWidth + 5 * casesize - windowWidth / 26.0;
 }
 
     currentCenter.x += speed;
@@ -30,7 +30,7 @@ Turtle::Turtle(double turtleSpeed, const Point &turtlePosition, double delay)
 void Turtle::draw(){
     if (!diving){
     Point center = physicalBorder.getCenter();
-    double r = casesize/2;
+    double r = casesize/2.0;
     array<Point, 37> points{};
   for (unsigned i = 0; i < 36; i++) {
     points.at(i) = {static_cast<double>(center.x + r * sin(i * 10 * pi / 180)),

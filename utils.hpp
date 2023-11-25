@@ -7,6 +7,9 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include <cmath>
+#include <iostream>
+
 using namespace std;
 
 const double refreshPerSecond = 60;

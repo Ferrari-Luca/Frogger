@@ -10,16 +10,16 @@ struct Point {
 class Rectangle {
 private:
     Point center;
-    int w, h;
+    double w, h;
     Fl_Color frameColor;
     Fl_Color fillColor;
 
 public:
-    Rectangle(Point center, int w, int h,
+    Rectangle(Point center, double w, double h,
               Fl_Color frameColor = FL_BLACK,
               Fl_Color fillColor = FL_WHITE);
 
-    void draw();
+    void draw() const;
 
     void setFillColor(Fl_Color newFillColor);
 
@@ -29,13 +29,13 @@ public:
 
     Point getCenter() const;
 
-    Fl_Color getColor() { return fillColor; }
+    Fl_Color getColor() const { return fillColor; }
 
-    bool checkCollision(Rectangle r);
+    bool checkCollision(Rectangle r) const;
 
-    int getWidth() { return w; }
+    double getWidth() const { return w; }
 
-    int getHeight() { return h; }
+    double getHeight() const { return h; }
 };
 
 #endif //FROGGER_POINT_RECTANGLE_H

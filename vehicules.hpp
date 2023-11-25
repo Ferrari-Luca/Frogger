@@ -13,10 +13,6 @@ public:
     SlidingObject(bool isDeadly, double speed, Rectangle physicalBorder)
             : isDeadly(isDeadly), speed(speed), physicalBorder(physicalBorder) {}
 
-    void setPosition(Point newPosition);
-
-    Point getPosition();
-
     virtual void draw();
 
     void slide();
@@ -47,8 +43,8 @@ class Turtle : public SlidingObject {
     double delay;
     bool diving;
     public:
-        Turtle(double turtleSpeed, const Point &turtlePosition, double delay);              
-    
+        Turtle(double turtleSpeed, const Point &turtlePosition, double delay);
+
         void draw() override;
         static void updateStateCallback(void *userdata);
         void updateState();

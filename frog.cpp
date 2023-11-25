@@ -37,8 +37,7 @@ void Frog::checkCollision() {
             noCollisionDetected = false;
             if (not object->getIsDeadly()) { speed = object->getSpeed(); }
             else {
-                r.setCenter({windowWidth / 2, 25 * windowHeight / 26});
-                currentLaneIndex = 12;
+                dead();
             }
             break;
         }
@@ -47,14 +46,18 @@ void Frog::checkCollision() {
     if (noCollisionDetected) {
         speed = 0;
         if (lanes[currentLaneIndex].getIsDeadly()) {
-            r.setCenter({windowWidth / 2, 25 * windowHeight / 26});
-            currentLaneIndex = 12;
+            dead();
         }
     }
 }
 
+void Frog::checkInBounds() {
+    if (r.getCenter().x > windowWidth || r.getCenter().x < 0 || r.getCenter().y > windowHeight || r.getCenter().y < 0)
+        dead();
+}
 
-// void Frog::setLane(vector<Lane> &laness) {
-//     lanes = laness;
-// }
+void Frog::dead() {
+    r.setCenter({windowWidth / 2.0, 25.0 * windowHeight / 26});
+    currentLaneIndex = 12;
 
+}

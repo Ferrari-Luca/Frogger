@@ -5,10 +5,11 @@
 
 class Frog {
     Rectangle r;
-    double step = windowWidth / 13;
+    double step = windowWidth / 13.0;
     vector<Lane> &lanes;  // Référence à l'attribut lanes du Canvas
     int currentLaneIndex = 12;
     double speed = 0;
+
 public:
     Frog(Point center, int w, int h, vector<Lane> &lanes);
 
@@ -20,11 +21,9 @@ public:
 
     void checkCollision();
 
-    void treatCollision(SlidingObject *object);
+    void checkInBounds();
 
-    // Lane *getLane() const;
-
-    // void setLane(vector<Lane> &lanes);
+    void dead();
 };
 
 #endif //FROGGER_FROG_H

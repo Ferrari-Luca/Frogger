@@ -8,8 +8,8 @@ class Canvas {
     vector<Lane> lanes;
 
 public:
-    Canvas(const std::vector<LaneInfo>& level,
-           Point frogCenter = {windowWidth / 2, 25 * windowHeight / 26},
+    explicit Canvas(const std::vector<LaneInfo>& level,
+           Point frogCenter = {windowWidth / 2.0, 25.0 * windowHeight / 26},
            int frogWidth = casesize - 20,
            int frogHeight = casesize - 20);
 
