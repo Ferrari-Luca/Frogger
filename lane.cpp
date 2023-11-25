@@ -3,7 +3,7 @@
 
 
 Lane::Lane(const LaneInfo &info, Point center) : rect(center, windowWidth, casesize) {
-    isDeadly = info.lanetype == 'R';
+    if (info.lanetype == 'R' || info.lanetype == 'W') isDeadly=true;
     Fl_Color color = (info.lanetype == 'R') ? FL_BLUE : FL_DARK3;
     if (info.lanetype == 'N') {
         color = FL_WHITE;

@@ -1,7 +1,7 @@
 #include "mainwindows.hpp"
 
 MainWindow::MainWindow(const std::vector<LaneInfo> &level)
-        : Fl_Window(900, 900, windowWidth, windowHeight, "Lab 2"), canvas(level) {
+        : Fl_Window(900, 900, windowWidth, windowHeight, "Frogger - Aleksandra OTTO, Luca FERRARI"), canvas(level) {
     Fl::add_timeout(1.0 / refreshPerSecond, Timer_CB, this);
     resizable(this);
 }

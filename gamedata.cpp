@@ -3,7 +3,7 @@
 GameData::GameData() {
     levels = {
             {
-                {'N', 1,   "______N__N_N_N__N_______"},
+                {'W', 1,   "______N__N_N_N__N_______"},
                 {'R', -1.5,"_ttt_TTT___TTT____TTT___"},
                 {'R', 4,   "______LLLLL________LLLLL"},
                 {'R', -6,  "__TT___TT___tt___TT___TT"},
