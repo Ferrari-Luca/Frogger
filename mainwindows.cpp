@@ -1,32 +1,44 @@
 #include "mainwindows.hpp"
+#include <FL/Fl.H>
 
-MainWindow::MainWindow(const std::vector<LaneInfo> &level)
-        : Fl_Window(900, 900, windowWidth, windowHeight, "Frogger - Aleksandra OTTO, Luca FERRARI"), canvas(level) {
+MainWindow::MainWindow()
+    : Fl_Window(900, 1000, windowWidth, windowHeight+100, "Frogger"), 
+      model(std::make_shared<GameModel>()),
+      displayBoard(model),
+      displayMenu(),
+      controllBoard(model, displayBoard, displayMenu) {
     Fl::add_timeout(1.0 / refreshPerSecond, Timer_CB, this);
     resizable(this);
+    // Initialiser les niveaux dans le modèle
+    // model->setLevelInfos(level);
 }
 
 void MainWindow::draw() {
-    Fl_Window::draw();
-    canvas.draw();
+    GameState currentState = model->getGameState();
+
+    switch (currentState) {
+        case GameState::InMenu:
+            displayMenu.draw();
+            break;
+        case GameState::InGame:
+            displayBoard.draw();
+            break;
+        case GameState::InEditor:
+            // Dessiner l'éditeur (si implémenté)
+            break;
+    }
 }
 
 int MainWindow::handle(int event) {
-    switch (event) {
-        case FL_MOVE:
-            return 1;
-        case FL_PUSH:
-            return 1;
-        case FL_KEYDOWN:
-            canvas.keyPressed(Fl::event_key());
-            return 1;
-    }
-    return 0;
+    return controllBoard.processEvent(event);
 }
 
 void MainWindow::Timer_CB(void *userdata) {
-    MainWindow *o = static_cast<MainWindow *>(userdata);
-    o->canvas.update();
-    o->redraw();
+    auto *win = static_cast<MainWindow *>(userdata);
+    // Mise à jour de l'état du jeu si dans l'état 'InGame'
+    if (win->model->getGameState() == GameState::InGame) {
+        win->model->getCurrentLevel().update();
+    }
+    win->redraw();
     Fl::repeat_timeout(1.0 / refreshPerSecond, Timer_CB, userdata);
 }

@@ -56,19 +56,6 @@ void Turtle::draw() {
     }
 }
 
-// void Turtle::startTimer() {
-//     // Ajouter une minuterie pour la prochaine mise à jour d'état
-//     Fl::add_timeout(delay, [](void *obj) {
-//         Turtle *turtle = static_cast<Turtle *>(obj);
-//         turtle->updateState();
-//         if (turtle->diving) {
-//             cout << "miam" << endl;
-//         } else {
-//             cout << "mim" << endl;
-//         }
-//     }, static_cast<void*>(this));
-// }
-
 void Turtle::updateStateCallback(void *userdata) {
     Turtle *o = static_cast<Turtle *>(userdata);
     o->updateState();

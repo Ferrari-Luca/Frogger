@@ -1,11 +1,10 @@
-#ifndef LANE_HPP
-#define LANE_HPP
-
+#pragma once
 #include "vehicules.hpp"
-#include "gamedata.hpp"
+#include "gametype.hpp"
 
 class Lane {
-    vector<unique_ptr<SlidingObject>> laneObjects;
+    vector<shared_ptr<SlidingObject>> laneObjects;
+    vector<Point> initialPosition;
     bool isDeadly;
     Rectangle rect;
 
@@ -13,9 +12,14 @@ public:
     Lane(const LaneInfo &info, Point center);
 
     void update();
-    void draw();
+    void draw() const;
     bool getIsDeadly() const;
-    const vector<unique_ptr<SlidingObject>> &getLaneObjects() const;
+    const vector<shared_ptr<SlidingObject>> &getLaneObjects() const;
+    void reset() {
+    for (size_t i = 0; i < laneObjects.size(); ++i) {
+        laneObjects[i]->setCenter(initialPosition[i]);
+    }
+};
 };
 
-#endif // LANE_HPP
+

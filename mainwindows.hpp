@@ -1,19 +1,22 @@
-#ifndef MAINWINDOW_HPP
-#define MAINWINDOW_HPP
-
-#include "canvas.hpp"
+#pragma once
+#include "gamemodel.hpp"
+#include "displaylvl.hpp"
+#include "displaymenu.hpp"
+#include "controller.hpp"
+#include <FL/Fl_Window.H>
+#include <memory>
 
 class MainWindow : public Fl_Window {
-    Canvas canvas;
+    std::shared_ptr<GameModel> model;
+    DisplayLevel displayBoard;
+    DisplayMenu displayMenu;
+    ControlBoard controllBoard;
 
 public:
-    MainWindow(const std::vector<LaneInfo> &level);
-
+    explicit MainWindow();
     void draw() override;
-
     int handle(int event) override;
 
-    static void Timer_CB(void *userdata);
+private:
+    static void Timer_CB(void* userdata);
 };
-
-#endif // MAINWINDOW_HPP

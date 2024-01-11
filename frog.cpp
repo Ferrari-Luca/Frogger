@@ -1,9 +1,12 @@
 #include "frog.hpp"
+#include "lane.hpp" 
+#include <iostream>
+#include <cassert>
+Frog::Frog(Point center, int w, int h)
+    : r(center, w, h, FL_BLACK, FL_GREEN){
+}
 
-Frog::Frog(Point center, int w, int h, vector<Lane> &lanes) :
-        r(center, w, h, FL_BLACK, FL_GREEN), lanes(lanes) {}
-
-void Frog::draw() {
+void Frog::draw() const{
     r.draw();
 }
 
@@ -13,6 +16,7 @@ void Frog::jump(int direction) {
         currentCenter.x -= step;
     } else if (direction == FL_Right) {
         currentCenter.x += step;
+
     } else if (direction == FL_Up) {
         currentCenter.y -= step;
         currentLaneIndex -= 1;
@@ -30,37 +34,18 @@ void Frog::move() {
     r.setCenter(currentCenter);
 }
 
-void Frog::checkCollision() {
-    bool noCollisionDetected = true;
-    for (const auto &object: lanes[currentLaneIndex].getLaneObjects()) {
-        if (r.checkCollision(object->getPhysical())) {
-            noCollisionDetected = false;
-            if (not object->getIsDeadly()) {
-                if (not object->getSpeed()){ // on est sur un nénuphar
-                    object->changeIsDeadly();
-                    win();
-                }
-                speed = object->getSpeed(); }
-            else {
-                dead();
-            }
-            break;
-        }
-    }
-
-    if (noCollisionDetected) {
-        speed = 0;
-        if (lanes[currentLaneIndex].getIsDeadly()) {
-            dead();
-        }
-    }
+int Frog::getCurrentLaneIndex(){
+    return currentLaneIndex;
 }
-
 void Frog::checkInBounds() {
-    if (r.getCenter().x > windowWidth || r.getCenter().x < 0 || r.getCenter().y > windowHeight || r.getCenter().y < 0)
-        dead();
+if (r.getCenter().x > windowWidth || r.getCenter().x < 0 || r.getCenter().y > windowHeight || r.getCenter().y < 0){
+        dead();}
 }
 
+void Frog::reset(){
+    r.setCenter({windowWidth / 2.0, 25.0 * windowHeight / 26});
+    currentLaneIndex = 12;
+}
 void Frog::dead() {
     r.setCenter({windowWidth / 2.0, 25.0 * windowHeight / 26});
     currentLaneIndex = 12;

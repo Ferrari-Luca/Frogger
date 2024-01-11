@@ -21,8 +21,9 @@ public:
 
     double getSpeed() const { return speed; }
 
-    Rectangle const getPhysical() const { return physicalBorder; }
+    Rectangle getPhysical() { return physicalBorder; }
 
+    void setCenter(Point point){physicalBorder.setCenter(point);}
     void changeIsDeadly();
 };
 
