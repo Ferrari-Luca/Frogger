@@ -2,8 +2,8 @@
 
 
 Lane::Lane(const LaneInfo &info, Point center) : rect(center, windowWidth, casesize) {
-    if (info.lanetype == 'R' || info.lanetype == 'W') isDeadly=true;
-    else isDeadly=false;
+    if (info.lanetype == 'R' || info.lanetype == 'W') isDeadly = true;
+    else isDeadly = false;
     Fl_Color color = (info.lanetype == 'R') ? FL_BLUE : FL_DARK3;
     if (info.lanetype == 'N') {
         color = FL_WHITE;
@@ -35,15 +35,15 @@ Lane::Lane(const LaneInfo &info, Point center) : rect(center, windowWidth, cases
 }
 
 void Lane::update() {
-    for (auto &object : laneObjects) {
+    for (auto &object: laneObjects) {
         object->slide();
     }
 }
 
-void Lane::draw() const{
+void Lane::draw() const {
     fl_draw_box(FL_FLAT_BOX, rect.getCenter().x - windowWidth / 2.0, rect.getCenter().y - casesize / 2.0, windowWidth,
                 casesize, rect.getColor());
-    for (auto &object : laneObjects) {
+    for (auto &object: laneObjects) {
         object->draw();
     }
 }

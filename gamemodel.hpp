@@ -1,7 +1,7 @@
 #pragma once
+
 #include "level.hpp"
 #include "gametype.hpp"
-
 
 
 class GameModel {
@@ -27,24 +27,48 @@ public:
 
     void resetLevel();
 
-    const Level& getCurrentLevel() const{
+    const Level &getCurrentLevel() const {
         if (currentlvl >= 0 && currentlvl <= levels.size()) {
-            return levels[currentlvl-1];
+            return levels[currentlvl - 1];
         } else {
             throw std::out_of_range("Current level index is out of rangetr");
         }
     }
 
 
-    Level& getCurrentLevel(){
+    Level &getCurrentLevel() {
         if (currentlvl >= 0 && currentlvl <= levels.size()) {
-            return levels[currentlvl-1];
+            return levels[currentlvl - 1];
         } else {
             throw std::out_of_range("Current level index is out of range");
         }
     }
 
-    int getCurrentLevelIndex(){
+    int getCurrentLevelIndex() {
         return currentlvl;
+    }
+
+    const Frog &getPlayer() const {
+        return getCurrentLevel().getPlayer();
+    }
+
+    const bool gameHasEnded() const {
+        return getPlayer().isEndOfGame();
+    }
+
+    bool isPlayerDead() const {
+        return getPlayer().isDead();
+    }
+
+    int getPlayerLives() const {
+        return getPlayer().getLives();
+    }
+
+    int getLevelScore() const {
+        return getCurrentLevel().getCurrentScore();
+    }
+
+    int getLevelHighScore() const {
+        return getCurrentLevel().getHighScore();
     }
 };

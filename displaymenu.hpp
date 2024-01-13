@@ -1,4 +1,5 @@
 #pragma once
+
 #include "utils.hpp"
 
 class DisplayMenu {
@@ -25,7 +26,7 @@ public:
 
     void draw() {
         // Dessiner tous les boutons
-        fl_draw_box(FL_FLAT_BOX, 0, 0, windowWidth, windowWidth+100, fl_rgb_color(0, 100, 0));
+        fl_draw_box(FL_FLAT_BOX, 0, 0, windowWidth, windowWidth + 100, fl_rgb_color(0, 100, 0));
         drawButton(lvl1);
         drawButton(lvl2);
         drawButton(lvl3);
