@@ -40,8 +40,8 @@ public:
 
         if (levelIndex != -1) {
             gamemodel->setCurrentLvl(levelIndex);
-            gamemodel->setGameState(GameState::InGame);}
-            gamemodel->resetLevel();
+            gamemodel->setGameState(GameState::InGame);
+            gamemodel->resetLevel();}
     }
 
     void handleLevelClick(int x, int y) {
