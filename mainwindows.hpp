@@ -3,7 +3,6 @@
 #include "displaylvl.hpp"
 #include "displaymenu.hpp"
 #include "controller.hpp"
-#include "leveleditor.hpp"
 #include <FL/Fl_Window.H>
 #include <memory>
 
