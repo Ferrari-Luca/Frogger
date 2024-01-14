@@ -59,6 +59,7 @@ public:
 
     void resetPosition();
     void resetVictories();
+    void timeisup(){lives=0;}
 
 };
 

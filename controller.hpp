@@ -41,12 +41,12 @@ public:
         if (levelIndex != -1) {
             gamemodel->setCurrentLvl(levelIndex);
             gamemodel->setGameState(GameState::InGame);}
+            gamemodel->resetLevel();
     }
 
     void handleLevelClick(int x, int y) {
         if (displayLevel.menu.contains(x, y)) {
             gamemodel->setGameState(GameState::InMenu);
-            gamemodel->resetLevel();
             gamemodel->setClassicMode(false);
         }
     }

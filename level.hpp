@@ -11,7 +11,7 @@ class Level {
     int& highScore;
     int currentScore = -10;
     std::chrono::steady_clock::time_point levelStartTime;
-    std::chrono::seconds levelDuration{60};
+    std::chrono::seconds levelDuration{120};
 
 public:
     explicit Level(int& highScoreRef, Frog &player, std::vector<LaneInfo> level);

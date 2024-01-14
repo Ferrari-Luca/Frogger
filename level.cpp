@@ -53,6 +53,9 @@ void Level::checkCollision() {
 }
 
 void Level::update() {
+    if (getTimeRemainingFraction() <= 0.0f) {
+        player.timeisup();
+    }
     player.checkInBounds();
     updateScore();
     checkCollision();
@@ -92,6 +95,7 @@ void Level::resetAll() {
     resetLanesVisited();
     resetLanes();
     resetScore();
+    startLevel();
 }
 
 void Level::resetLanesVisited() {

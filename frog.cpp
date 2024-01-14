@@ -81,9 +81,11 @@ void Frog::jump(int direction) {
             orientation = UP;
             currentLaneIndex -= 1;
         } else if (direction == FL_Down) {
-            currentCenter.y += step;
-            orientation = DOWN;
-            currentLaneIndex += 1;
+            if (currentLaneIndex < 12) {
+                currentCenter.y += step;
+                orientation = DOWN;
+                currentLaneIndex += 1;
+            }
         }
 
         r.setCenter(currentCenter);
