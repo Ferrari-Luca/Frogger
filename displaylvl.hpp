@@ -13,7 +13,7 @@ public:
         std::string text;
 
         void draw() const {
-            fl_draw_box(FL_UP_BOX, x, y, width, height, FL_BLUE);
+            fl_draw_box(FL_FLAT_BOX, x, y, width, height, FL_BLUE);
             fl_color(FL_BLACK);
             fl_font(FL_HELVETICA, 20);
             fl_draw(text.c_str(), x + 5, y + 20);
@@ -46,7 +46,7 @@ private:
     }
 
     void drawEndMessage() {
-        fl_draw_box(FL_UP_BOX, 200, 800, 335, 50, FL_BLACK);
+        fl_draw_box(FL_FLAT_BOX, 200, 800, 335, 50, FL_BLACK);
         fl_color(FL_RED);
         fl_font(FL_HELVETICA, 25);
         if (gamemodel->isPlayerDead()) {
