@@ -11,7 +11,6 @@ public:
     struct Message {
         int x, y, width, height;
         std::string text;
-
         void draw() const {
             fl_draw_box(FL_FLAT_BOX, x, y, width, height, FL_BLUE);
             fl_color(FL_BLACK);

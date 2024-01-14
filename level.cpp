@@ -18,6 +18,10 @@ void Level::draw() const {
 }
 
 void Level::checkCollision() {
+    /*
+     * Méthode permettant de déterminer si une collison a eu entre le joueur et les véhicules de la rangée où il se
+     * trouve et de vérifier les conditions de mort/victoire
+     */
     bool noCollisionDetected = true;
     int currentLaneIndex = player.getCurrentLaneIndex();
     Rectangle r = player.getR();
@@ -56,6 +60,7 @@ void Level::update() {
     if (getTimeRemainingFraction() <= 0.0f) {
         player.timeisup();
     }
+    // Mise à jour du joueur, score et déplacement des véhicules
     player.checkInBounds();
     updateScore();
     checkCollision();
@@ -70,9 +75,12 @@ void Level::updateScore() {
     Lane &currentLane = lanes.at(index);
 
     if (not currentLane.wasVisited()) {
+        // La rangée courante n'a pas encore été visitée
         currentLane.setVisited(true);
         if (player.getCurrentLaneIndex() == 0) {
+            // Joueur a atteint un nénuphare
             incrementScore(512 - player.getNumberOfMoves());
+            // Réinitialisation des lignes visitées et du nombre de sauts réalisés
             resetLanesVisited();
             player.resetNumberOfMoves();
         }

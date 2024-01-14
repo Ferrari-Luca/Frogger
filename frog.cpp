@@ -71,17 +71,20 @@ void Frog::jump(int direction) {
         numberOfMoves += 1;
         Point currentCenter = r.getCenter();
         switch (direction) {
+            // Le joueur se déplace vers la gauche
             case 'q':
             case 'w':
             case FL_Left:
                 currentCenter.x -= step;
                 orientation = LEFT;
                 break;
+            // Le joueur se déplace vers la droite
             case 'd':
             case FL_Right:
                 currentCenter.x += step;
                 orientation = RIGHT;
                 break;
+            // Le joueur se déplace vers le haut
             case 'z':
             case 'a':
             case FL_Up:
@@ -89,6 +92,7 @@ void Frog::jump(int direction) {
                 orientation = UP;
                 currentLaneIndex -= 1;
                 break;
+            // Le joueur se déplace vers le bas
             case 's':
             case FL_Down:
                 if (currentLaneIndex<12){
@@ -115,6 +119,7 @@ int Frog::getCurrentLaneIndex() {
 }
 
 void Frog::checkInBounds() {
+    // Vérifie si le joueur est toujours dans les limites de l'écran
     if (r.getCenter().x > windowWidth || r.getCenter().x < 0 || r.getCenter().y > windowHeight || r.getCenter().y < 0) {
         dead();
     }

@@ -2,10 +2,10 @@ W 4 ______N__N_N_N__N_______
 R -2.5 TT___TTT__ttt_TTT__TTT__
 R 3 L___LLLL___LLLLL____LLL_
 R -7 tt__TT___tt___TT__tt___T
-R 2.5 LL____LL____LL____LL____
+R 3.5 LL____LL____LLL___LL____
 R -1 tttt___TTTT____tttt_____
 N 0 ________________________
-S 6 _C__C__C_C__C__C_C__C___
+S 6 _C__C____C_____C_C__C___
 S -4 ____CCCCC______CCCCC____
 S 2 __CC____CC____CC________
 S -10 _C_____________C_____C_C

@@ -2,11 +2,14 @@
 
 Lane::Lane(const LaneInfo &info, Point center) : rect(center, windowWidth, casesize), isDeadly(info.lanetype == 'R' || info.lanetype == 'W') {
     Fl_Color color;
+    // Rangée rivière
     if (info.lanetype == 'R') {
         color = FL_BLUE;
-    } else if (info.lanetype == 'N') {
+    } // Rangée trottoir
+    else if (info.lanetype == 'N') {
         color = FL_WHITE;
-    } else {
+    } // Rangée route
+    else {
         color = FL_DARK3;
     }
     rect.setFillColor(color);
@@ -15,11 +18,15 @@ Lane::Lane(const LaneInfo &info, Point center) : rect(center, windowWidth, cases
 }
 
 void Lane::initializeObjects(const LaneInfo &info, const Point& center) {
+    /*
+     * Méthode créant et initialisant tous les objets présents sur la rangée courante
+     */
     for (int i = 0; i < (int) info.gameobject.size(); i++) {
         Point object_center{static_cast<double>((i - 5) * casesize + windowWidth / 26.0), center.y};
-        if (info.gameobject[i] == '_') continue;
+        if (info.gameobject[i] == '_') continue; // Pas de véhicule à créer
         auto object = createObject(info.gameobject[i], info.speed, object_center);
         if (object) {
+            // Initialise la position initiale de l'objet dans la rangée lui correspondant
             laneObjects.push_back(std::move(object));
             initialPosition.push_back(object_center);
         }
@@ -27,6 +34,7 @@ void Lane::initializeObjects(const LaneInfo &info, const Point& center) {
 }
 
 std::shared_ptr<SlidingObject> Lane::createObject(char type, double speed, const Point &center) {
+    // Associe à chaque lettre le véhicule lui correspondant et le crée
     switch (type) {
         case 'C': return std::make_shared<Car>(speed, center);
         case 'L': return std::make_shared<Log>(speed, center);

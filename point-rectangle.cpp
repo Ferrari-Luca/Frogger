@@ -9,11 +9,13 @@ Rectangle::Rectangle(Point center, double w, double h,
 }
 
 bool Rectangle::checkCollision(Rectangle other) const{
+    // Extrémités du 1e objet
     double thisLeft = center.x - w / 2;
     double thisRight = center.x + w / 2;
     double thisTop = center.y - h / 2;
     double thisBottom = center.y + h / 2;
 
+    // Extrémités du 2nd objet
     double otherLeft = other.getCenter().x - other.getWidth() / 2;
     double otherRight = other.getCenter().x + other.getWidth() / 2;
     double otherTop = other.getCenter().y - other.getHeight() / 2;

@@ -6,21 +6,28 @@ GameModel::GameModel() {
 }
 
 void GameModel::initializeLevels() {
+    /*
+     * Méthode chargant la représentation d'un niveau à partir d'un fichier où sont présentées ligne par lignes les
+     * rangées et leurs informations
+     */
     std::string line;
     for (int levelNum = 1; levelNum <= num_levels; ++levelNum) {
         std::ifstream levelFile("level" + std::to_string(levelNum) + ".txt");
         std::vector<LaneInfo> levelInfo;
         
         if (levelFile.is_open()) {
+            // Chargement ligne par ligne des caractères représentant les informations d'une rangée
             while (getline(levelFile, line)) {
                 std::istringstream iss(line);
                 char lanetype;
                 double speed;
                 std::string gameobject;
 
+                // Initialisation des données nécessaire pour représenter la rangée lue
                 iss >> lanetype >> speed >> gameobject;
                 levelInfo.push_back({lanetype, speed, gameobject});
             }
+            // Initialisation des rangées du niveau
             levels.emplace_back(highScores[levelNum],player, levelInfo);
         } else {
             std::cerr << "Erreur : Impossible d'ouvrir le fichier level" << levelNum << ".txt" << std::endl;
@@ -35,7 +42,6 @@ void GameModel::setCurrentLvl(int index) {
 
 void GameModel::resetLevel() {
     getCurrentLevel().resetAll();
-    player.reset();
 }
 
 GameState GameModel::getGameState() const {
@@ -89,9 +95,12 @@ bool GameModel::isClassicMode() const
     { return classicMode; }
 
 void GameModel::nextLevel() {
+    // Passage au niveau suivant
     if (currentlvl < (int) levels.size()) {
+        // Réinitialisation de position de joueur et de nénuphares atteint
         player.resetPosition();
         player.resetVictories();
+        // Changement du niveau courant
         setCurrentLvl(currentlvl + 1);
 
     } else {
@@ -103,6 +112,7 @@ void GameModel::update(){
     if (gameState == GameState::InGame){
         levels[currentlvl-1].update();
     }
+    // Passage au niveau suivant si joueur victorieux en mode classique
     if (isClassicMode() && player.isVictorious()) {
             nextLevel();
 }}
