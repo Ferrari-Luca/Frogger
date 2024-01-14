@@ -6,6 +6,7 @@
 
 class Lane;
 
+enum Orientation { LEFT, RIGHT, UP, DOWN };
 class Frog {
     Rectangle r;
     double step = windowWidth / 13.0;
@@ -14,6 +15,7 @@ class Frog {
     int lives = 3;
     int victories = 0;
     int numberOfMoves = 0;
+    Orientation orientation;
 
 public:
 
@@ -56,6 +58,7 @@ public:
     void reset();
 
     void resetPosition();
+    void resetVictories();
 
 };
 

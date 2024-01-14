@@ -4,6 +4,7 @@
 #include "level.hpp"
 #include "displaylvl.hpp"
 #include "displaymenu.hpp"
+#include <FL/Fl.h>
 
 class ControlBoard {
     std::shared_ptr<GameModel> gamemodel;
@@ -14,64 +15,58 @@ public:
     explicit ControlBoard(std::shared_ptr<GameModel> model, DisplayLevel &dLevel, DisplayMenu &dMenu)
             : gamemodel{std::move(model)}, displayLevel(dLevel), displayMenu(dMenu) {}
 
-    bool handleClick(int x, int y) {
-        int levelIndex = -1;
-        if (displayMenu.lvl1.contains(x, y)) {
-            levelIndex = 1;
-        } else if (displayMenu.lvl2.contains(x, y)) {
-            levelIndex = 2;
-        } else if (displayMenu.lvl3.contains(x, y)) {
-            levelIndex = 3;
-        } else if (displayMenu.lvl4.contains(x, y)) {
-            levelIndex = 4;
+    void handleClick(int x, int y) {
+        if (gamemodel->getGameState() == GameState::InMenu) {
+            handleMenuClick(x, y);
+        } else if (gamemodel->getGameState() == GameState::InGame) {
+            handleLevelClick(x, y);
         }
+    }
+
+    void handleMenuClick(int x, int y) {
+        int levelIndex = -1;
+        if (displayMenu.lvl1.contains(x, y)) levelIndex = 1;
+        else if (displayMenu.lvl2.contains(x, y)) levelIndex = 2;
+        else if (displayMenu.lvl3.contains(x, y)) levelIndex = 3;
+        else if (displayMenu.lvl4.contains(x, y)) levelIndex = 4;
+        else if (displayMenu.classic.contains(x, y)) {
+        gamemodel->setClassicMode(true);
+        levelIndex = 1;
+         }
+        else if (displayMenu.quitButton.contains(x, y)) {
+          gamemodel->saveHighScores();
+          exit(0); // Quitte l'application
+       }
 
         if (levelIndex != -1) {
             gamemodel->setCurrentLvl(levelIndex);
-            gamemodel->setGameState(GameState::InGame);
+            gamemodel->setGameState(GameState::InGame);}
+    }
+
+    void handleLevelClick(int x, int y) {
+        if (displayLevel.menu.contains(x, y)) {
+            gamemodel->setGameState(GameState::InMenu);
+            gamemodel->resetLevel();
+            gamemodel->setClassicMode(false);
         }
     }
 
     bool processEvent(int event) {
-        switch (gamemodel->getGameState()) {
-            case GameState::InMenu:
-                return processMenuEvent(event);
-            case GameState::InGame:
-                return processLevelEvent(event);
-            case GameState::InEditor:
-                // Gérer l'événement pour l'éditeur si nécessaire
+        int x = Fl::event_x();
+        int y = Fl::event_y();
+
+        switch (event) {
+            case FL_PUSH:
+                handleClick(x, y);
                 break;
-        }
-        return false;
-    }
-
-    bool processMenuEvent(int event) {
-        switch (event) {
-            case FL_PUSH: {
-                handleClick(Fl::event_x(), Fl::event_y());
-            }
             case FL_KEYDOWN:
-
-            default:
-                return false;
-        }
-        return false;
-    }
-
-
-    bool processLevelEvent(int event) {
-        switch (event) {
-            case FL_PUSH: {
-                if (displayLevel.menu.contains(Fl::event_x(), Fl::event_y())) {
-                    gamemodel->setGameState(GameState::InMenu);
-                    gamemodel->resetLevel();
+                if (gamemodel->getGameState() == GameState::InGame) {
+                    gamemodel->getCurrentLevel().getPlayer().jump(Fl::event_key());
                 }
-            }
-            case FL_KEYDOWN:
-                gamemodel->getCurrentLevel().getPlayer().jump(Fl::event_key());
+                break;
             default:
                 return false;
         }
-        return false;
+        return true;
     }
 };

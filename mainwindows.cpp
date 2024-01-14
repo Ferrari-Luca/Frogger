@@ -9,8 +9,6 @@ MainWindow::MainWindow()
       controllBoard(model, displayBoard, displayMenu) {
     Fl::add_timeout(1.0 / refreshPerSecond, Timer_CB, this);
     resizable(this);
-    // Initialiser les niveaux dans le modèle
-    // model->setLevelInfos(level);
 }
 
 void MainWindow::draw() {
@@ -35,10 +33,7 @@ int MainWindow::handle(int event) {
 
 void MainWindow::Timer_CB(void *userdata) {
     auto *win = static_cast<MainWindow *>(userdata);
-    // Mise à jour de l'état du jeu si dans l'état 'InGame'
-    if (win->model->getGameState() == GameState::InGame) {
-        win->model->getCurrentLevel().update();
-    }
+    win->model->update();
     win->redraw();
     Fl::repeat_timeout(1.0 / refreshPerSecond, Timer_CB, userdata);
 }

@@ -2,36 +2,29 @@
 
 #include "vehicules.hpp"
 #include "gametype.hpp"
+#include <vector>
+#include <memory>
 
 class Lane {
-    vector<shared_ptr<SlidingObject>> laneObjects;
-    vector<Point> initialPosition;
+private:
+    std::vector<std::shared_ptr<SlidingObject>> laneObjects;
+    std::vector<Point> initialPosition;
     bool isDeadly;
     Rectangle rect;
     bool visited = false;
 
+    void initializeObjects(const LaneInfo &info, const Point& center);
+    std::shared_ptr<SlidingObject> createObject(char type, double speed, const Point &center);
+
 public:
     Lane(const LaneInfo &info, Point center);
-
     void update();
-
     void draw() const;
 
     bool getIsDeadly() const;
+    const std::vector<std::shared_ptr<SlidingObject>> &getLaneObjects() const;
 
-    const vector<shared_ptr<SlidingObject>> &getLaneObjects() const;
-
-    void setVisited() { visited = true; }
-
-    void setNotVisited() { visited = false; }
-
-    bool wasVisited() const { return visited; }
-
-    void reset() {
-        for (size_t i = 0; i < laneObjects.size(); ++i) {
-            laneObjects[i]->setCenter(initialPosition[i]);
-        }
-    };
+    void setVisited(bool state);
+    bool wasVisited() const;
+    void reset();
 };
-
-

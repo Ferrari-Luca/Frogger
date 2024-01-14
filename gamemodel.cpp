@@ -1,77 +1,33 @@
 #include "gamemodel.hpp"
 
 GameModel::GameModel() {
-    levelinfos = {
-            // LVL1
-            {
-                    {'W', 1, "______N__N_N_N__N_______"},
-                    {'R', -1.5, "_ttt_TTT___TTT____TTT___"},
-                    {'R', 4,  "______LLLLL________LLLLL"},
-                    {'R', -6, "__TT___TT___tt___TT___TT"},
-                    {'R', 1,   "_______LL___LL______LL__"},
-                    {'R', -3, "__TTTT__________tttt____"},
-                    {'N', 0, "________________________"},
-                    {'S', 1,  "C__C__C__C__C__C__C__C__"},
-                    {'S', -1.5, "_________________CCCCC__"},
-                    {'S', 5,  "_________CC_____________"},
-                    {'S', -10, "____________C_C_________"},
-                    {'S', 1,   "CC____CC____CC____CC____"},
-                    {'N', 0, "________________________"}
-            },
-            // LVL2
-            {
-                    {'W', 1, "______N__N_N_N__N_______"},
-                    {'R', -2,   "_TT_ttt___ttt_TT___TTT__"},
-                    {'R', 5,  "______LLLLLLL_____LLLL__"},
-                    {'R', -4, "TT__tt__TT___TT___tt__TT"},
-                    {'R', 3,   "LL____LL_____LL___LL____"},
-                    {'R', -5, "tttt_____TTTT______tttt_"},
-                    {'N', 0, "________________________"},
-                    {'S', -3, "C__C__C____C__C____C__C_"},
-                    {'S', 2,    "_______CCCCC___CCCCC____"},
-                    {'S', -6, "_CC_______CC_________CC_"},
-                    {'S', 8,   "C__C____________C_C__C_C"},
-                    {'S', 0,   "____CC____CC____CC______"},
-                    {'N', 0, "________________________"}
-            },
-            // LVL3
-            {
-                    {'W', 1, "______N__N_N_N__N_______"},
-                    {'R', 4,    "TTT__ttt_TTT__ttt__TTT__"},
-                    {'R', -1, "LLLL________LLLL___LLLL_"},
-                    {'R', 6,  "___tt___TT___TT___tt____"},
-                    {'R', -7,  "__LL___LL______LL___LL__"},
-                    {'R', 1,  "___tttt__________TTTT___"},
-                    {'N', 0, "________________________"},
-                    {'S', -2, "__C__C__C__C__C__C__C___"},
-                    {'S', 3.5,  "C___CCCCC________CCCCC__"},
-                    {'S', -9, "CC________CC_______CC___"},
-                    {'S', 1,   "___C_C________C_C__C_C__"},
-                    {'S', -1,  "CC____CC____CC____CC____"},
-                    {'N', 0, "________________________"}
-            },
-            // LVL4
-            {
-                    {'W', 4, "______N__N_N_N__N_______"},
-                    {'R', -2.5, "TT___TTT__ttt_TTT__TTT__"},
-                    {'R', 3,  "L___LLLL___LLLLL____LLL_"},
-                    {'R', -7, "tt__TT___tt___TT__tt___T"},
-                    {'R', 2.5, "LL____LL____LL____LL____"},
-                    {'R', -1, "tttt___TTTT____tttt_____"},
-                    {'N', 0, "________________________"},
-                    {'S', 6,  "_C__C__C_C__C__C_C__C___"},
-                    {'S', -4,   "____CCCCC______CCCCC____"},
-                    {'S', 2,  "__CC____CC____CC________"},
-                    {'S', -10, "_C_____________C_____C_C"},
-                    {'S', 3.5, "CC________CC______CC____"},
-                    {'N', 0, "________________________"}
+    loadHighScores();
+    initializeLevels();
+}
+
+void GameModel::initializeLevels() {
+    std::string line;
+    for (int levelNum = 1; levelNum <= num_levels; ++levelNum) {
+        std::ifstream levelFile("level" + std::to_string(levelNum) + ".txt");
+        std::vector<LaneInfo> levelInfo;
+        
+        if (levelFile.is_open()) {
+            while (getline(levelFile, line)) {
+                std::istringstream iss(line);
+                char lanetype;
+                double speed;
+                std::string gameobject;
+
+                iss >> lanetype >> speed >> gameobject;
+                levelInfo.push_back({lanetype, speed, gameobject});
             }
-    };
-    // Création des niveaux à partir des informations
-    for (const auto &levelinfo: levelinfos) {
-        levels.emplace_back(player, levelinfo);
+            levels.emplace_back(highScores[levelNum],player, levelInfo);
+        } else {
+            std::cerr << "Erreur : Impossible d'ouvrir le fichier level" << levelNum << ".txt" << std::endl;
+        }
     }
 }
+
 
 void GameModel::setCurrentLvl(int index) {
     currentlvl = index;
@@ -80,4 +36,112 @@ void GameModel::setCurrentLvl(int index) {
 void GameModel::resetLevel() {
     getCurrentLevel().resetAll();
     player.reset();
+}
+
+GameState GameModel::getGameState() const {
+    return gameState;
+}
+
+void GameModel::setGameState(GameState newState) {
+    gameState = newState;
+}
+
+const Level& GameModel::getCurrentLevel() const {
+        if (currentlvl >= 0 && currentlvl <= levels.size()) {
+            return levels[currentlvl - 1];
+        } else {
+            throw std::out_of_range("Current level index is out of rangetr");
+        }
+    }
+
+Level& GameModel::getCurrentLevel() {
+        if (currentlvl >= 0 && currentlvl <= levels.size()) {
+            return levels[currentlvl - 1];
+        } else {
+            throw std::out_of_range("Current level index is out of range");
+        }
+    }
+
+int GameModel::getCurrentLevelIndex() const {
+    return currentlvl;
+}
+
+const Frog& GameModel::getPlayer() const {
+        return player;
+    }
+
+bool GameModel::gameHasEnded() const {
+        return player.isEndOfGame();
+    }
+
+bool GameModel::isPlayerDead() const {
+        return player.isDead();
+    }
+
+int GameModel::getPlayerLives() const {
+        return player.getLives();
+    }
+
+int GameModel::getLevelScore() const {
+        return levels[currentlvl-1].getCurrentScore();
+    }
+
+int GameModel::getLevelHighScore() const {
+        return levels[currentlvl-1].getHighScore();
+    }
+
+void GameModel::setClassicMode(bool mode) 
+    { classicMode = mode; }
+
+bool GameModel::isClassicMode() const 
+    { return classicMode; }
+
+void GameModel::nextLevel() {
+    if (currentlvl < levels.size()) {
+        player.resetPosition();
+        player.resetVictories();
+        setCurrentLvl(currentlvl + 1);
+
+    } else {
+        classicMode=false;
+    }
+}
+
+void GameModel::update(){
+    if (gameState == GameState::InGame){
+        levels[currentlvl-1].update();
+    }
+    if (isClassicMode() && player.isVictorious()) {
+            nextLevel();
+}}
+
+void GameModel::loadHighScores() {
+    std::ifstream file("highscores.txt");
+    std::string line;
+
+    if (file.is_open()) {
+        while (getline(file, line)) {
+            int score;
+            std::istringstream iss(line);
+            if (iss >> score) {
+                highScores.push_back(score);
+            } else {
+                highScores.push_back(0);  // En cas d'erreur de format, mettre le score à 0
+            }
+        }
+    } 
+}
+
+void GameModel::saveHighScores() {
+    std::ofstream file("highscores.txt");
+    if (file.is_open()) {
+        for (int score : highScores) {
+            file << score << std::endl;
+        }
+    }
+}
+
+void GameModel::resetHighScores() {
+    std::fill(highScores.begin(), highScores.end(), 0);
+    saveHighScores(); 
 }

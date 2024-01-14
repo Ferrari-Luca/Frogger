@@ -2,73 +2,50 @@
 
 #include "level.hpp"
 #include "gametype.hpp"
-
+#include <fstream>
+#include <sstream>
+#include <iostream>
+#include <vector>
+#include <memory>
 
 class GameModel {
+private:
     Frog player;
-    vector<vector<LaneInfo>> levelinfos;
-    vector<Level> levels;
+    std::vector<std::vector<LaneInfo>> levelinfos;
+    std::vector<Level> levels;
     int currentlvl;
-    GameState gameState;  // Attribut pour l'état du jeu
+    GameState gameState;
+    bool classicMode = false;
+    std::vector<int> highScores;
+    void initializeLevels();
 
 public:
-    GameModel();  // Déclaration du constructeur
+    GameModel();
     void setCurrentLvl(int index);
-
-    // Getter pour l'état du jeu
-    GameState getGameState() const {
-        return gameState;
-    }
-
-    // Setter pour l'état du jeu
-    void setGameState(GameState newState) {
-        gameState = newState;
-    }
-
     void resetLevel();
 
-    const Level &getCurrentLevel() const {
-        if (currentlvl >= 0 && currentlvl <= levels.size()) {
-            return levels[currentlvl - 1];
-        } else {
-            throw std::out_of_range("Current level index is out of rangetr");
-        }
-    }
+    GameState getGameState() const;
+    void setGameState(GameState newState);
 
+    const Level& getCurrentLevel() const;
+    Level& getCurrentLevel();
+    int getCurrentLevelIndex() const;
 
-    Level &getCurrentLevel() {
-        if (currentlvl >= 0 && currentlvl <= levels.size()) {
-            return levels[currentlvl - 1];
-        } else {
-            throw std::out_of_range("Current level index is out of range");
-        }
-    }
+    const Frog& getPlayer() const;
+    bool gameHasEnded() const;
+    bool isPlayerDead() const;
+    int getPlayerLives() const;
+    int getLevelScore() const;
+    int getLevelHighScore() const;
 
-    int getCurrentLevelIndex() {
-        return currentlvl;
-    }
+    void setClassicMode(bool mode);
+    bool isClassicMode() const;
+    void nextLevel();
 
-    const Frog &getPlayer() const {
-        return getCurrentLevel().getPlayer();
-    }
+    void update();
 
-    const bool gameHasEnded() const {
-        return getPlayer().isEndOfGame();
-    }
+    void loadHighScores();
+    void saveHighScores();
+    void resetHighScores();
 
-    bool isPlayerDead() const {
-        return getPlayer().isDead();
-    }
-
-    int getPlayerLives() const {
-        return getPlayer().getLives();
-    }
-
-    int getLevelScore() const {
-        return getCurrentLevel().getCurrentScore();
-    }
-
-    int getLevelHighScore() const {
-        return getCurrentLevel().getHighScore();
-    }
 };

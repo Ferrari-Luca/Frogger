@@ -1,6 +1,5 @@
 
-#ifndef FROGGER_UTILS_HPP
-#define FROGGER_UTILS_HPP
+#pragma once
 
 #include <FL/Fl.H>
 #include <FL/fl_draw.H>
@@ -18,5 +17,4 @@ const int windowHeight = 780;
 const int casesize = windowWidth / 13;
 const int frogWidth = casesize - 20;
 const int frogHeight = casesize - 20;
-
-#endif //FROGGER_UTILS_HPP
+const int num_levels = 4;

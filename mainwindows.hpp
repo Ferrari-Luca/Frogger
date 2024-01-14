@@ -3,6 +3,7 @@
 #include "displaylvl.hpp"
 #include "displaymenu.hpp"
 #include "controller.hpp"
+#include "leveleditor.hpp"
 #include <FL/Fl_Window.H>
 #include <memory>
 
@@ -11,6 +12,7 @@ class MainWindow : public Fl_Window {
     DisplayLevel displayBoard;
     DisplayMenu displayMenu;
     ControlBoard controllBoard;
+    
 
 public:
     explicit MainWindow();
