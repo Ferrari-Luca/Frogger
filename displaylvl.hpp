@@ -30,8 +30,9 @@ explicit DisplayLevel( std::shared_ptr<GameModel const> model)
         menu.draw();
         drawGameStatusMessages();
         if (gamemodel->gameHasEnded()) {
-            drawEndMessage();
-        }
+            drawEndMessage();}
+        else{
+        fl_draw_box(FL_FLAT_BOX, 200, 800, 335, 50, fl_rgb_color(0, 100, 0));}
     }
 
 private:
