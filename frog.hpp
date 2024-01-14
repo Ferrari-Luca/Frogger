@@ -37,7 +37,7 @@ public:
 
     void incrementVictories() { victories += 1; }
 
-    bool isVictorious() const { return victories == 5; }
+    bool isVictorious() const { return victories == 1; }
 
     bool isEndOfGame() const { return isVictorious() || isDead(); }
 
@@ -59,7 +59,7 @@ public:
 
     void resetPosition();
     void resetVictories();
-    void timeisup(){lives=0;}
+    void timeisup(){if(!isVictorious()){lives=0;}}
 
 };
 
