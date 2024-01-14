@@ -91,11 +91,18 @@ void Level::updateHighScore() {
     }
 }
 
+
 void Level::resetAll() {
     resetLanesVisited();
     resetLanes();
     resetScore();
+    resetPlayer();
     startLevel();
+
+}
+
+void Level::resetPlayer(){
+    getPlayer().reset();
 }
 
 void Level::resetLanesVisited() {

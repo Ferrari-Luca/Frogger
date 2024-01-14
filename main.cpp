@@ -14,13 +14,14 @@ void showSplashScreen() {
     splashBoxTitle->labeltype(FL_SHADOW_LABEL);
 
     // Box pour les noms en italique
-    Fl_Box *splashBoxNames = new Fl_Box(0, 350, 900, 100, "Alexandra Otto\nLuca Ferrari");
+    Fl_Box *splashBoxNames = new Fl_Box(0, 350, 900, 100, "Aleksandra Otto\nLuca Ferrari");
     splashBoxNames->labelfont(FL_BOLD + FL_ITALIC);
     splashBoxNames->labelsize(36);
     splashBoxNames->labeltype(FL_SHADOW_LABEL);
 
-    splashWindow->end();
     splashWindow->show();
+
+    splashWindow->end();
 
     // Force FLTK à rafraîchir et à traiter les événements
     Fl::flush();

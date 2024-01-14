@@ -145,3 +145,7 @@ void GameModel::resetHighScores() {
     std::fill(highScores.begin(), highScores.end(), 0);
     saveHighScores(); 
 }
+
+void GameModel::currentLevelPlayerJump(){
+    getCurrentLevel().getPlayer().jump(Fl::event_key());
+}

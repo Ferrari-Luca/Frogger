@@ -4,6 +4,7 @@
 #include "lane.hpp"
 #include "gametype.hpp"
 #include <vector>
+#include <chrono>
 
 class Level {
     Frog &player;
@@ -19,6 +20,7 @@ public:
     void resetAll();
     void resetLanes();
     void resetScore();
+    void resetPlayer();
     void resetLanesVisited();
 
     void update();

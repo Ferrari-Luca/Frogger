@@ -21,9 +21,10 @@ public:
     };
 
     Button menu;
+    Button highScore;
 
 explicit DisplayLevel( std::shared_ptr<GameModel const> model)
-    : gamemodel(std::move(model)), menu({550, 800, 150, 50, "Menu"}) {}
+    : gamemodel(std::move(model)), menu({550, 800, 150, 50, "Menu"}), highScore({30,850,150,25,""}){}
 
     void draw() override {
         gamemodel->getCurrentLevel().draw();
@@ -38,11 +39,11 @@ private:
     void drawGameStatusMessages() const {
         Message lives({30, 790, 150, 25, "Lives: " + std::to_string(gamemodel->getPlayerLives())});
         Message score({30, 820, 150, 25, "Score: " + std::to_string(gamemodel->getLevelScore())});
-        Message highScore({30, 850, 150, 25, "HS: " + std::to_string(gamemodel->getLevelHighScore())});
-
+        Message hScore({30, 850, 150, 25, "HS: " + std::to_string(gamemodel->getLevelHighScore())});
+        //highScore = {30,850,150,25,"HS: " + std::to_string(gamemodel->getLevelHighScore())};
         lives.draw();
         score.draw();
-        highScore.draw();
+        hScore.draw();
     }
 
     void drawEndMessage() {

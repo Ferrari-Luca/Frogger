@@ -37,6 +37,7 @@ public:
     int getPlayerLives() const;
     int getLevelScore() const;
     int getLevelHighScore() const;
+    void currentLevelPlayerJump();
 
     void setClassicMode(bool mode);
     bool isClassicMode() const;

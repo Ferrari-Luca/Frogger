@@ -16,8 +16,8 @@ public:
         void draw() const {
             fl_draw_box(FL_UP_BOX, x, y, width, height, FL_BLUE);
             fl_color(FL_BLACK);
-            fl_font(FL_HELVETICA, 16);
-            fl_draw(label.c_str(), x + 10, y + height / 2);
+            fl_font(FL_HELVETICA, 20);
+            fl_draw(label.c_str(), x + 10, y + height / 2 + 10);
         }
     };
 

@@ -4,7 +4,7 @@
 #include "level.hpp"
 #include "displaylvl.hpp"
 #include "displaymenu.hpp"
-#include <FL/Fl.h>
+//#include <FL/Fl.h>
 
 class ControlBoard {
     std::shared_ptr<GameModel> gamemodel;
@@ -49,6 +49,9 @@ public:
             gamemodel->setGameState(GameState::InMenu);
             gamemodel->setClassicMode(false);
         }
+        else if(displayLevel.highScore.contains(x,y)){
+            gamemodel->resetHighScores();
+        }
     }
 
     bool processEvent(int event) {
@@ -61,7 +64,14 @@ public:
                 break;
             case FL_KEYDOWN:
                 if (gamemodel->getGameState() == GameState::InGame) {
-                    gamemodel->getCurrentLevel().getPlayer().jump(Fl::event_key());
+                    switch (Fl::event_key()) {
+                        case 'r':
+                            gamemodel->resetLevel();
+                            break;
+                        default:
+                            gamemodel->currentLevelPlayerJump();
+                    }
+
                 }
                 break;
             default:
