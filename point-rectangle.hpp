@@ -20,22 +20,15 @@ public:
               Fl_Color fillColor = FL_WHITE);
 
     void draw() const;
-
     void setFillColor(Fl_Color newFillColor);
-
     void setFrameColor(Fl_Color newFrameColor);
-
     void setCenter(Point newCenter);
 
     Point getCenter() const;
-
     Fl_Color getColor() const { return fillColor; }
-
-    bool checkCollision(Rectangle r) const;
-
     double getWidth() const { return w; }
-
     double getHeight() const { return h; }
+    bool checkCollision(Rectangle r) const;
 };
 
 #endif //FROGGER_POINT_RECTANGLE_H

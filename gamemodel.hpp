@@ -29,7 +29,6 @@ public:
 
     const Level& getCurrentLevel() const;
     Level& getCurrentLevel();
-    int getCurrentLevelIndex() const;
 
     const Frog& getPlayer() const;
     bool gameHasEnded() const;

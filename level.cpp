@@ -1,6 +1,6 @@
 #include "level.hpp"
 
-Level::Level(int& highScoreRef, Frog &player, std::vector<LaneInfo> level) : highScore(highScoreRef),player(player) {
+Level::Level(int &highScoreRef, Frog &player, std::vector<LaneInfo> level) : player(player), highScore(highScoreRef) {
     for (size_t i = 0; i < level.size(); ++i) {
         Point laneCenter{windowWidth / 2.0, static_cast<double>(i * casesize) + casesize / 2.0};
         lanes.emplace_back(level[i], laneCenter);
@@ -30,7 +30,7 @@ void Level::checkCollision() {
             // Gestion des comportements en fonction de l'état de l'objet (mortel ou non, etc.)
             if (!object->getIsDeadly()) {
                 // Si l'objet n'est pas mortel.
-                if (!object->getSpeed()) { // on est sur un nénuphar
+                if (!(bool)object->getSpeed()) { // on est sur un nénuphar
                     object->changeIsDeadly();
                     player.win();
                 }
@@ -65,14 +65,10 @@ void Level::update() {
     }
 }
 
-void Level::keyPressed(int keyCode) {
-    player.jump(keyCode);
-}
-
 void Level::updateScore() {
     int index = player.getCurrentLaneIndex();
-    Lane& currentLane = lanes.at(index);
-    
+    Lane &currentLane = lanes.at(index);
+
     if (not currentLane.wasVisited()) {
         currentLane.setVisited(true);
         if (player.getCurrentLaneIndex() == 0) {
@@ -87,7 +83,7 @@ void Level::updateScore() {
 
 void Level::updateHighScore() {
     if (getHighScore() < currentScore) {
-        highScore=currentScore;
+        highScore = currentScore;
     }
 }
 
@@ -101,7 +97,7 @@ void Level::resetAll() {
 
 }
 
-void Level::resetPlayer(){
+void Level::resetPlayer() {
     getPlayer().reset();
 }
 
@@ -115,7 +111,7 @@ void Level::resetLanes() {
     }
 }
 
-void Level::resetScore() {currentScore = 0;}
+void Level::resetScore() { currentScore = 0; }
 
 void Level::incrementScore(int value) {
     currentScore += value;
@@ -129,15 +125,7 @@ int Level::getHighScore() const {
     return highScore;
 }
 
-const std::vector<Lane>& Level::getLanes() const {
-    return lanes;
-}
-
-Frog& Level::getPlayer() {
-    return player;
-}
-
-const Frog& Level::getPlayer() const {
+Frog &Level::getPlayer() {
     return player;
 }
 
@@ -146,6 +134,8 @@ void Level::startLevel() {
 }
 
 float Level::getTimeRemainingFraction() const {
-auto now = std::chrono::steady_clock::now();
-auto timeElapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - levelStartTime);
-return std::max(0.0f, static_cast<float>(levelDuration.count() * 1000 - timeElapsed.count()) / (levelDuration.count() * 1000));}
+    auto now = std::chrono::steady_clock::now();
+    auto timeElapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - levelStartTime);
+    return std::max(0.0f, static_cast<float>(levelDuration.count() * 1000 - timeElapsed.count()) /
+            (float) (levelDuration.count() * 1000));
+}

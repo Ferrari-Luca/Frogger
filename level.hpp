@@ -26,18 +26,13 @@ public:
     void update();
     void draw() const;
     void checkCollision();
-    void keyPressed(int keyCode);
     void updateScore();
     void updateHighScore();
-
     void incrementScore(int value);
 
     int getCurrentScore() const;
     int getHighScore() const;
-
-    const std::vector<Lane>& getLanes() const;
     Frog& getPlayer();
-    const Frog& getPlayer() const;
 
     void startLevel();
     float getTimeRemainingFraction() const;

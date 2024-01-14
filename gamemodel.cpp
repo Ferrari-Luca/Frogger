@@ -47,27 +47,19 @@ void GameModel::setGameState(GameState newState) {
 }
 
 const Level& GameModel::getCurrentLevel() const {
-        if (currentlvl >= 0 && currentlvl <= levels.size()) {
-            return levels[currentlvl - 1];
-        } else {
-            throw std::out_of_range("Current level index is out of rangetr");
-        }
-    }
-
-Level& GameModel::getCurrentLevel() {
-        if (currentlvl >= 0 && currentlvl <= levels.size()) {
+        if (currentlvl >= 0 && currentlvl <= (int) levels.size()) {
             return levels[currentlvl - 1];
         } else {
             throw std::out_of_range("Current level index is out of range");
         }
     }
 
-int GameModel::getCurrentLevelIndex() const {
-    return currentlvl;
-}
-
-const Frog& GameModel::getPlayer() const {
-        return player;
+Level& GameModel::getCurrentLevel() {
+        if (currentlvl >= 0 && currentlvl <= (int) levels.size()) {
+            return levels[currentlvl - 1];
+        } else {
+            throw std::out_of_range("Current level index is out of range");
+        }
     }
 
 bool GameModel::gameHasEnded() const {
@@ -97,7 +89,7 @@ bool GameModel::isClassicMode() const
     { return classicMode; }
 
 void GameModel::nextLevel() {
-    if (currentlvl < levels.size()) {
+    if (currentlvl < (int) levels.size()) {
         player.resetPosition();
         player.resetVictories();
         setCurrentLvl(currentlvl + 1);

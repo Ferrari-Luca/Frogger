@@ -15,7 +15,7 @@ Lane::Lane(const LaneInfo &info, Point center) : rect(center, windowWidth, cases
 }
 
 void Lane::initializeObjects(const LaneInfo &info, const Point& center) {
-    for (int i = 0; i < info.gameobject.size(); i++) {
+    for (int i = 0; i < (int) info.gameobject.size(); i++) {
         Point object_center{static_cast<double>((i - 5) * casesize + windowWidth / 26.0), center.y};
         if (info.gameobject[i] == '_') continue;
         auto object = createObject(info.gameobject[i], info.speed, object_center);

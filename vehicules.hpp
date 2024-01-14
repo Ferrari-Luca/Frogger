@@ -14,17 +14,13 @@ public:
             : isDeadly(isDeadly), speed(speed), physicalBorder(physicalBorder) {}
 
     virtual void draw();
-
     void slide();
-
-    bool getIsDeadly() const;
-
-    double getSpeed() const { return speed; }
-
-    Rectangle getPhysical() { return physicalBorder; }
-
     void setCenter(Point point){physicalBorder.setCenter(point);}
     void changeIsDeadly();
+
+    bool getIsDeadly() const;
+    double getSpeed() const { return speed; }
+    Rectangle getPhysical() { return physicalBorder; }
 };
 
 class Car : public SlidingObject {
@@ -49,9 +45,7 @@ public:
     Turtle(double turtleSpeed, const Point &turtlePosition, double delay);
 
     void draw() override;
-
     static void updateStateCallback(void *userdata);
-
     void updateState();
 
     // Fonction pour démarrer la minuterie

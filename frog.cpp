@@ -70,24 +70,34 @@ void Frog::jump(int direction) {
     if (!isDead() && !isVictorious()) {
         numberOfMoves += 1;
         Point currentCenter = r.getCenter();
-        if (direction == FL_Left) {
-            currentCenter.x -= step;
-            orientation = LEFT;
-        } else if (direction == FL_Right) {
-            currentCenter.x += step;
-            orientation = RIGHT;
-        } else if (direction == FL_Up) {
-            currentCenter.y -= step;
-            orientation = UP;
-            currentLaneIndex -= 1;
-        } else if (direction == FL_Down) {
-            if (currentLaneIndex < 12) {
+        switch (direction) {
+            case 'q':
+            case 'w':
+            case FL_Left:
+                currentCenter.x -= step;
+                orientation = LEFT;
+                break;
+            case 'd':
+            case FL_Right:
+                currentCenter.x += step;
+                orientation = RIGHT;
+                break;
+            case 'z':
+            case 'a':
+            case FL_Up:
+                currentCenter.y -= step;
+                orientation = UP;
+                currentLaneIndex -= 1;
+                break;
+            case 's':
+            case FL_Down:
                 currentCenter.y += step;
                 orientation = DOWN;
                 currentLaneIndex += 1;
-            }
+                break;
+            default:
+                break;
         }
-
         r.setCenter(currentCenter);
     }
 }
@@ -116,10 +126,12 @@ void Frog::resetPosition() {
 
 void Frog::resetVictories() {victories = 0;}
 
+void Frog::resetLives() { lives = 3; }
+
 void Frog::reset() {
     resetPosition();
     resetVictories();
-    lives = 3;
+    resetLives();
 }
 
 void Frog::dead() {

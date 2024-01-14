@@ -9,8 +9,8 @@ class Lane {
 private:
     std::vector<std::shared_ptr<SlidingObject>> laneObjects;
     std::vector<Point> initialPosition;
-    bool isDeadly;
     Rectangle rect;
+    bool isDeadly;
     bool visited = false;
 
     void initializeObjects(const LaneInfo &info, const Point& center);

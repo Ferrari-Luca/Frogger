@@ -20,7 +20,6 @@ void showSplashScreen() {
     splashBoxNames->labeltype(FL_SHADOW_LABEL);
 
     splashWindow->show();
-
     splashWindow->end();
 
     // Force FLTK à rafraîchir et à traiter les événements

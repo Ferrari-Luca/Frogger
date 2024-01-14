@@ -19,7 +19,6 @@ public:
             fl_draw(text.c_str(), x + 5, y + 20);
         }
     };
-
     Button menu;
     Button highScore;
 
@@ -40,7 +39,6 @@ private:
         Message lives({30, 790, 150, 25, "Lives: " + std::to_string(gamemodel->getPlayerLives())});
         Message score({30, 820, 150, 25, "Score: " + std::to_string(gamemodel->getLevelScore())});
         Message hScore({30, 850, 150, 25, "HS: " + std::to_string(gamemodel->getLevelHighScore())});
-        //highScore = {30,850,150,25,"HS: " + std::to_string(gamemodel->getLevelHighScore())};
         lives.draw();
         score.draw();
         hScore.draw();
