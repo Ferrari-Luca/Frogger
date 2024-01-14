@@ -13,7 +13,6 @@ MainWindow::MainWindow()
 
 void MainWindow::draw() {
     GameState currentState = model->getGameState();
-
     switch (currentState) {
         case GameState::InMenu:
             displayMenu.draw();
