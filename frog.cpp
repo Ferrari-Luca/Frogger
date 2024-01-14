@@ -73,7 +73,7 @@ void Frog::jump(int direction) {
         switch (direction) {
             // Le joueur se déplace vers la gauche
             case 'q':
-            case 'w':
+            case 'a':
             case FL_Left:
                 currentCenter.x -= step;
                 orientation = LEFT;
@@ -86,7 +86,7 @@ void Frog::jump(int direction) {
                 break;
             // Le joueur se déplace vers le haut
             case 'z':
-            case 'a':
+            case 'w':
             case FL_Up:
                 currentCenter.y -= step;
                 orientation = UP;
