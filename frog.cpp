@@ -91,9 +91,10 @@ void Frog::jump(int direction) {
                 break;
             case 's':
             case FL_Down:
+                if (currentLaneIndex<12){
                 currentCenter.y += step;
                 orientation = DOWN;
-                currentLaneIndex += 1;
+                currentLaneIndex += 1;}
                 break;
             default:
                 break;
