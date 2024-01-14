@@ -117,9 +117,7 @@ void GameModel::loadHighScores() {
             std::istringstream iss(line);
             if (iss >> score) {
                 highScores.push_back(score);
-            } else {
-                highScores.push_back(0);  // En cas d'erreur de format, mettre le score à 0
-            }
+            } 
         }
     } 
 }
@@ -139,5 +137,5 @@ void GameModel::resetHighScores() {
 }
 
 void GameModel::currentLevelPlayerJump(){
-    getCurrentLevel().getPlayer().jump(Fl::event_key());
+    player.jump(Fl::event_key());
 }
